@@ -1,0 +1,12 @@
+md5_s1_append_bits.c
+md5_s2_append_length.c
+md5_s3_create_buffer.c
+md5_s4_process_message.c
+sha256_s1_append_bits.c
+sha256_s2_append_length.c
+sha256_s3_create_buffer.c
+sha256_s4_process_message.c
+sha512_s1_append_bits.c
+sha512_s2_append_length.c
+sha512_s3_create_buffer.c
+sha512_s4_process_message.c
