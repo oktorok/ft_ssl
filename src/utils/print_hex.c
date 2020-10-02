@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:49 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 17:16:46 by jagarcia         ###   ########.fr       */
+/*   Updated: 2020/10/02 19:59:15 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 static void	print_prolog(int hash, t_source src, int fd)
 {
 	if (src.type == INPUT && check_flag('p'))
-		return (str[ft_strlen(str) - 1] != '\n' ? ft_putendl_fd(str, fd) : 0);
+	{
+		if (src.src[ft_strlen(src.src) - 1] != '\n')
+			ft_putendl_fd(src.src, fd);
+		return ;
+	}
 	if (check_flag('r') || check_flag('q'))
 		return ;
 	if (hash == MD5)
