@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sha512_s4_process_message.c                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:41:33 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:12:59 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 #include "sha512.h"
 
-static void generate_w(int i, t_wrap msg, ulong w[80])
+static void	generate_w(int i, t_wrap msg, ulong w[80])
 {
 	int		j;
 	ulong	s0;
@@ -9,13 +21,13 @@ static void generate_w(int i, t_wrap msg, ulong w[80])
 	t_wrap	p;
 
 	p.l = (msg.l + i * 16);
-	for (int t = 0; t < 16; t++)
+	j = -1;
+	while (++j < 16)
 	{
-		w[t] = ((ulong *)little_to_big(p.l, 1, sizeof(p.l)))[0];
+		w[j] = ((ulong *)little_to_big(p.l, 1, sizeof(p.l)))[0];
 		p.l += 1;
 	}
-	j = 15;
-	while (++j < 80)
+	while (j < 80)
 	{
 		s0 = (w[j - 15] >> 1) | (w[j - 15] << (64 - 1));
 		s0 ^= (w[j - 15] >> 8) | (w[j - 15] << (64 - 8));
@@ -24,10 +36,11 @@ static void generate_w(int i, t_wrap msg, ulong w[80])
 		s1 ^= (w[j - 2] >> 61) | (w[j - 2] << (64 - 61));
 		s1 ^= (w[j - 2] >> 6);
 		w[j] = w[j - 16] + s0 + w[j - 7] + s1;
+		j++;
 	}
 }
 
-static void set_abcd(ulong *abcd, ulong ch, ulong maj)
+static void	set_abcd(ulong *abcd, ulong ch, ulong maj)
 {
 	abcd[7] = abcd[6];
 	abcd[6] = abcd[5];
@@ -39,7 +52,7 @@ static void set_abcd(ulong *abcd, ulong ch, ulong maj)
 	abcd[0] = ch + maj;
 }
 
-static void execute_operations(int i, ulong *abcd, ulong w[64])
+static void	execute_operations(int i, ulong *abcd, ulong w[64])
 {
 	ulong ch;
 	ulong maj;
@@ -48,7 +61,7 @@ static void execute_operations(int i, ulong *abcd, ulong w[64])
 	ch ^= (abcd[4] >> 18) | (abcd[4] << (64 - 18));
 	ch ^= (abcd[4] >> 41) | (abcd[4] << (64 - 41));
 	ch += (abcd[4] & abcd[5]) ^ ((~abcd[4]) & abcd[6]);
-	ch += abcd[7] + k512[i] + w[i];
+	ch += abcd[7] + g_k512[i] + w[i];
 	maj = (abcd[0] >> 28) | (abcd[0] << (64 - 28));
 	maj ^= (abcd[0] >> 34) | (abcd[0] << (64 - 34));
 	maj ^= (abcd[0] >> 39) | (abcd[0] << (64 - 39));
@@ -56,13 +69,13 @@ static void execute_operations(int i, ulong *abcd, ulong w[64])
 	set_abcd(abcd, ch, maj);
 }
 
-t_wrap	sha512_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
+t_wrap		sha512_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
 {
 	size_t	i;
 	int		j;
 	ulong	w[80];
 	ulong	tmp_abcd[8];
-	
+
 	i = 0;
 	while (i < msg_bits / 1024)
 	{

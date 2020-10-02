@@ -1,5 +1,4 @@
-
-.PHONY : all clean fclean re check_libft check_ft_printf
+.PHONY : all clean fclean re check_libft
 
 #MAKEFLAGS += --silent
 
@@ -45,7 +44,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ)
 
-$(OBJ_DIR)%.o : %.c $(HEADERS_PATH)
+$(OBJ_DIR)%.o : %.c $(HEADER_PATH)
 	@printf "\r                                          "
 	@printf "\r\033[92m--->Compiling $(@F)\033[0m"
 	@gcc $(FLAGS) -I$(INCLUDES_DIR) -I$(LIBFT_HEADERS) -c $<
@@ -59,7 +58,7 @@ all:  check_libft $(NAME)
 $(NAME) : $(OBJ) $(LIBFT_PATH)$(LIBFT)
 	gcc $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
 
-$(OBJ_DIR)%.o: %.c $(HEADERS_PATH)
+$(OBJ_DIR)%.o: $(HEADER_PATH) %.c
 	@printf "\033[92mCompiling ft_ssl...\033[0m\n"
 	@$(MAKE)  MODE=0
 	@printf "\r                                          "

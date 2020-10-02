@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sha256_s3_create_buffer.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:41:33 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:06:01 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 
 t_wrap	sha256_create_buffer(void)
 {
 	t_wrap	buffer;
-	
+
 	if (!(buffer.i = (uint *)ft_memalloc(sizeof(uint) * 8)))
 		return (buffer);
 	buffer.i[0] = 0x6a09e667;

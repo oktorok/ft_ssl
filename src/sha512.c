@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sha512.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:06:36 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 
 static int	bits_for_add(size_t msg_bits)
@@ -12,7 +24,7 @@ static int	bits_for_add(size_t msg_bits)
 	return (896 - mod_1024);
 }
 
-t_wrap	sha512(t_wrap msg)
+t_wrap		sha512(t_wrap msg)
 {
 	size_t		original_length;
 	size_t		msg_bits;

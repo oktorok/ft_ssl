@@ -10,3 +10,7 @@ sha512_s1_append_bits.c
 sha512_s2_append_length.c
 sha512_s3_create_buffer.c
 sha512_s4_process_message.c
+whirlpool_s1_append_bits.c
+whirlpool_s2_append_length.c
+whirlpool_s3_create_buffer.c
+whirlpool_s4_process_message.c

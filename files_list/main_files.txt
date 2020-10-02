@@ -2,5 +2,6 @@ main.c
 md5.c
 sha256.c
 sha512.c
+whirlpool.c
 initialize_data.c
 take_inputs.c

@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   md5_s3_create_buffer.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:41:33 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:06:23 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 
-t_wrap	 md5_create_buffer(void)
+t_wrap	md5_create_buffer(void)
 {
-	t_wrap	 buffer;
+	t_wrap	buffer;
 
 	if (!(buffer.i = (uint *)ft_memalloc(sizeof(uint) * 4)))
 		return (buffer);

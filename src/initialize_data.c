@@ -1,10 +1,29 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   initialize_data.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:06:55 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 
-t_source	*fill_srcs(int source_num, char **argv)
+static void		set_src_params(t_source *srcs, char *name, int *j, int input)
+{
+	srcs[*j].name = name;
+	srcs[*j].type = input;
+	(*j)++;
+}
+
+static t_source	*fill_srcs(int source_num, char **argv)
 {
 	t_source	*srcs;
 	int			j;
-	
+
 	if (!(srcs = ft_memalloc(sizeof(t_source) * source_num)))
 		return (NULL);
 	j = 0;
@@ -12,34 +31,33 @@ t_source	*fill_srcs(int source_num, char **argv)
 	{
 		if (!(srcs[j].src = take_stdin()))
 			return (NULL);
-		srcs[j].name = srcs[j].src;
-		srcs[j++].type = INPUT;
+		set_src_params(srcs, srcs[j].src, &j, INPUT);
 	}
 	if (check_flag('s'))
 	{
 		if (!(srcs[j].src = ft_strdup(*argv++)))
 			return (NULL);
-		srcs[j].name = srcs[j].src;
-		srcs[j++].type = STRING;
+		set_src_params(srcs, srcs[j].src, &j, STRING);
 	}
 	while (*argv)
 	{
 		if (take_file(*argv, &srcs[j].src) < 0)
 			return (NULL);
-		srcs[j].name = *argv++;
-		srcs[j++].type = FILE;
+		set_src_params(srcs, *argv++, &j, FILE);
 	}
 	return (srcs);
 }
 
-static int	fill_hash(char **argv, t_data *data)
+static int		fill_hash(char **argv, t_data *data)
 {
-	if (ft_strequ(argv[1],"md5"))
+	if (ft_strequ(argv[1], "md5"))
 		data->hash = MD5;
-	else if (ft_strequ(argv[1],"sha256"))
+	else if (ft_strequ(argv[1], "sha256"))
 		data->hash = SHA256;
-	else if (ft_strequ(argv[1],"sha512"))
-		data->hash = SHA512;	
+	else if (ft_strequ(argv[1], "sha512"))
+		data->hash = SHA512;
+	else if (ft_strequ(argv[1], "whirlpool"))
+		data->hash = WHIRLPOOL;
 	else
 	{
 		ft_putstr("Hash algorithm not known\n");
@@ -48,14 +66,14 @@ static int	fill_hash(char **argv, t_data *data)
 	return (1);
 }
 
-t_data	*init(char **argv, int argn)
+t_data			*init(char **argv, int argn)
 {
 	t_data	*data;
 	int		i;
 
 	if (!(data = (t_data *)ft_memalloc(sizeof(t_data))))
 		return (NULL);
-	if (!(i = set_flags(argv)))
+	if (!(i = set_flags(argv, data)))
 		return (NULL);
 	if (!(fill_hash(argv, data)))
 		return (NULL);

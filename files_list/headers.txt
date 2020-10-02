@@ -1,3 +1,5 @@
 ft_ssl.h
 md5.h
 sha256.h
+sha512.h
+whirlpool.h

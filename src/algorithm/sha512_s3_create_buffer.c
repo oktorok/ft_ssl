@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sha512_s3_create_buffer.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:41:33 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:05:37 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 
 t_wrap	sha512_create_buffer(void)
 {
 	t_wrap	buffer;
-	
+
 	if (!(buffer.l = (ulong *)ft_memalloc(sizeof(ulong) * 8)))
 		return (buffer);
 	buffer.l[0] = 0x6a09e667f3bcc908;

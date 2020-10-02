@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   take_inputs.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
+/*   Updated: 2020/10/02 17:03:50 by jagarcia         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_ssl.h"
 
-char	*take_stdin()
+char	*take_stdin(void)
 {
 	char *input;
 
@@ -13,7 +25,7 @@ char	*take_stdin()
 int		take_file(char *filename, char **files)
 {
 	int		fd;
-	
+
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		*files = NULL;
