@@ -90,7 +90,7 @@ void		print_hex(u_char *output, t_source src, int hash, char *output_file)
 	int		length;
 
 	j = 0;
-	fd = 0;
+	fd = 1;
 	length = set_length(hash);
 	if (output_file)
 		fd = open(output_file, O_WRONLY | O_CREAT, 0666);
