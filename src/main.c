@@ -6,12 +6,11 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 17:09:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2020/10/02 20:18:35 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
-#include <stdlib.h>
 
 static t_wrap	hashing(t_wrap digest, int hash)
 {

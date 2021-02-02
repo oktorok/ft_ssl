@@ -22,7 +22,7 @@ static void	print_help_func(void)
 \t-q: quiet mode\n \
 \t-c: capital letters\n \
 \t-o: output file\n \
-\t-n: only output hashes \
+\t-n: only output hashes\n \
 \t-r: reverse the format of the output.\n \
 \t-s: print the sum of the given string\n");
 }
