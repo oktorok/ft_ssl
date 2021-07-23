@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:33 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 17:12:59 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/07/23 22:53:00 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 static void	generate_w(int i, t_wrap msg, unsigned long w[80])
 {
-	int		j;
+	int				j;
 	unsigned long	s0;
 	unsigned long	s1;
-	t_wrap	p;
+	t_wrap			p;
 
 	p.l = (msg.l + i * 16);
 	j = -1;
@@ -54,8 +54,8 @@ static void	set_abcd(unsigned long *abcd, unsigned long ch, unsigned long maj)
 
 static void	execute_operations(int i, unsigned long *abcd, unsigned long w[64])
 {
-	unsigned long ch;
-	unsigned long maj;
+	unsigned long	ch;
+	unsigned long	maj;
 
 	ch = (abcd[4] >> 14) | (abcd[4] << (64 - 14));
 	ch ^= (abcd[4] >> 18) | (abcd[4] << (64 - 18));
@@ -69,10 +69,10 @@ static void	execute_operations(int i, unsigned long *abcd, unsigned long w[64])
 	set_abcd(abcd, ch, maj);
 }
 
-t_wrap		sha512_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
+t_wrap	sha512_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
 {
-	size_t	i;
-	int		j;
+	size_t			i;
+	int				j;
 	unsigned long	w[80];
 	unsigned long	tmp_abcd[8];
 

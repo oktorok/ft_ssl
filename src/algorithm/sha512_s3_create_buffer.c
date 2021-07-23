@@ -16,7 +16,8 @@ t_wrap	sha512_create_buffer(void)
 {
 	t_wrap	buffer;
 
-	if (!(buffer.l = (unsigned long *)ft_memalloc(sizeof(unsigned long) * 8)))
+	buffer.l = (unsigned long *)ft_memalloc(sizeof(unsigned long) * 8);
+	if (!buffer.l)
 		return (buffer);
 	buffer.l[0] = 0x6a09e667f3bcc908;
 	buffer.l[1] = 0xbb67ae8584caa73b;

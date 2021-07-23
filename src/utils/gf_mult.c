@@ -12,7 +12,7 @@
 
 #include "ft_ssl.h"
 
-unsigned char		gf_mult(unsigned char a, unsigned char b)
+unsigned char	gf_mult(unsigned char a, unsigned char b)
 {
 	unsigned char	p;
 	int				i;

@@ -27,7 +27,15 @@ static void	print_help_func(void)
 \t-s: print the sum of the given string\n");
 }
 
-int			set_flags(char **argv, t_data *data)
+static int	check_first_dash(char e)
+{
+	if (e == '-')
+		return (1);
+	else
+		return (2);
+}
+
+int	set_flags(char **argv, t_data *data)
 {
 	int	flags;
 	int	ns;
@@ -35,7 +43,7 @@ int			set_flags(char **argv, t_data *data)
 
 	flags = 0;
 	ns = 0;
-	i = ((argv[1][0] == '-') ? 1 : 2);
+	i = check_first_dash(argv[1][0]);
 	while (argv[i] && argv[i][0] == '-')
 	{
 		while (argv[i][ns] == '-')
@@ -55,9 +63,9 @@ int			set_flags(char **argv, t_data *data)
 	return (i);
 }
 
-char		check_flag(int to_check)
+char	check_flag(int to_check)
 {
-	static int flags = -1;
+	static int	flags = -1;
 
 	if (flags < 0)
 	{

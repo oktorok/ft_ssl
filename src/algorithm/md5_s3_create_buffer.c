@@ -16,7 +16,8 @@ t_wrap	md5_create_buffer(void)
 {
 	t_wrap	buffer;
 
-	if (!(buffer.i = (unsigned int *)ft_memalloc(sizeof(unsigned int) * 4)))
+	buffer.i = (unsigned int *)ft_memalloc(sizeof(unsigned int) * 4);
+	if (!buffer.i)
 		return (buffer);
 	buffer.i[0] = 0x67452301;
 	buffer.i[1] = 0xefcdab89;

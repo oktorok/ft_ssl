@@ -27,7 +27,8 @@ int	read_file(int fd, char **content)
 		else if (!ro)
 			break ;
 		len = ft_strlen(*content);
-		if (!(*content = ft_strrealloc(*content, ro + len)))
+		*content = ft_strrealloc(*content, ro + len);
+		if (!(*content))
 			return (0);
 		ft_strncpy(*content + len, buffer, ro);
 	}

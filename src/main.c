@@ -28,7 +28,7 @@ static t_wrap	hashing(t_wrap digest, int hash)
 	return (output);
 }
 
-static void		print_error(t_source src, int hash)
+static void	print_error(t_source src, int hash)
 {
 	ft_putstr("ft_ssl: ");
 	if (hash == MD5)
@@ -43,27 +43,29 @@ static void		print_error(t_source src, int hash)
 	ft_putendl(": No such file or directory");
 }
 
-static int		print_format_error(int argn)
+static t_data	*check_input(int argn, char **argv)
 {
+	t_data	*data;
+
 	if (argn < 2)
 	{
 		ft_putendl("ft_ssl: Incorrect format, write -h or --help for \
 an explanation of the correct format");
-		return (0);
+		return (NULL);
 	}
-	return (1);
+	data = init(argv, argn);
+	return (data);
 }
 
-int				main(int argn, char **argv)
+int	main(int argn, char **argv)
 {
 	t_data	*data;
 	int		j;
 	t_wrap	digest;
 	t_wrap	output;
 
-	if (!print_format_error(argn))
-		return (-1);
-	if (!(data = init(argv, argn)))
+	data = check_input(argn, argv);
+	if (!data)
 		return (-1);
 	j = 0;
 	while (j < data->source_num)

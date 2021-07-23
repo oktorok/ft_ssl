@@ -26,14 +26,14 @@
 # define WHIRLPOOL 6
 # define MAX_OFFSET 8
 
-typedef struct	s_source
+typedef struct s_source
 {
 	char		type;
 	char		*src;
 	char		*name;
 }				t_source;
 
-typedef struct	s_data
+typedef struct s_data
 {
 	int			hash;
 	int			source_num;
@@ -41,12 +41,12 @@ typedef struct	s_data
 	char		*output_file;
 }				t_data;
 
-typedef union	u_wrap{
-	char		*c;
-	unsigned char		*uc;
-	unsigned int		*i;
-	unsigned long		*l;
-	size_t		*s;
+typedef union u_wrap{
+	char			*c;
+	unsigned char	*uc;
+	unsigned int	*i;
+	unsigned long	*l;
+	size_t			*s;
 }				t_wrap;
 
 int				main(int a, char **b);

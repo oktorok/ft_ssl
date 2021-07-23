@@ -59,7 +59,7 @@ static void	print_epilog(t_source src, int fd)
 
 static int	set_length(int hash)
 {
-	int length;
+	int	length;
 
 	length = 0;
 	if (hash == MD5)
@@ -84,7 +84,7 @@ static void	write_hash(unsigned char byte, int fd)
 	ft_strdel(&t);
 }
 
-void		print_hex(unsigned char *output, t_source src, int hash, char *output_file)
+void	print_hex(unsigned char *output, t_source src, int hash, char *outputf)
 {
 	int		fd;
 	int		j;
@@ -93,8 +93,8 @@ void		print_hex(unsigned char *output, t_source src, int hash, char *output_file
 	j = 0;
 	fd = 1;
 	length = set_length(hash);
-	if (output_file)
-		fd = open(output_file, O_WRONLY | O_CREAT, 0666);
+	if (outputf)
+		fd = open(outputf, O_WRONLY | O_CREAT, 0666);
 	if (!check_flag('n'))
 		print_prolog(hash, src, fd);
 	while (j < length)

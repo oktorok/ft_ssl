@@ -20,7 +20,7 @@
 
 t_wrap	sha512_append_length(t_wrap msg, size_t msg_bits, size_t orig_len)
 {
-	size_t	len_place;
+	size_t			len_place;
 	unsigned long	low;
 	unsigned long	high;
 

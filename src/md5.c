@@ -21,7 +21,8 @@ t_wrap	md5(t_wrap msg)
 
 	original_length = ultra_strlen(msg.c);
 	msg_bits = original_length * 8 + calc_adding_bits(original_length * 8) + 64;
-	if (!(digest.c = ft_strrealloc(msg.c, msg_bits / 8)))
+	digest.c = ft_strrealloc(msg.c, msg_bits / 8);
+	if (!digest.c)
 		return (digest);
 	digest = md5_append_bits(digest, original_length);
 	digest = md5_append_length(digest, msg_bits, original_length);

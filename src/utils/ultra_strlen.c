@@ -14,7 +14,7 @@
 
 size_t	ultra_strlen(char *src)
 {
-	size_t size;
+	size_t	size;
 
 	size = 0;
 	if (!src)

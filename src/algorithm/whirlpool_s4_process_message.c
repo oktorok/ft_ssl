@@ -92,7 +92,7 @@ static void	rf(unsigned char *k, int round)
 	ak(k, rc);
 }
 
-t_wrap		whirlpool_process_message(t_wrap cstate, size_t msg_bits, t_wrap h)
+t_wrap	whirlpool_process_message(t_wrap cstate, size_t msg_bits, t_wrap h)
 {
 	int				i;
 	size_t			block;

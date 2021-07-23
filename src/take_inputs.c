@@ -14,7 +14,7 @@
 
 char	*take_stdin(void)
 {
-	char *input;
+	char	*input;
 
 	input = NULL;
 	if (!read_file(0, &input))
@@ -22,7 +22,7 @@ char	*take_stdin(void)
 	return (input);
 }
 
-int		take_file(char *filename, char **files)
+int	take_file(char *filename, char **files)
 {
 	int		fd;
 

@@ -13,7 +13,7 @@
 #ifndef MD5_H
 # define MD5_H
 
-const char	*g_operations[] = {
+const char			*g_operations[] = {
 	"ABCD F  0  7  1", "DABC F  1 12  2", "CDAB F  2 17  3", "BCDA F  3 22  4",
 	"ABCD F  4  7  5", "DABC F  5 12  6", "CDAB F  6 17  7", "BCDA F  7 22  8",
 	"ABCD F  8  7  9", "DABC F  9 12 10", "CDAB F 10 17 11", "BCDA F 11 22 12",

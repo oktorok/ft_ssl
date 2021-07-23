@@ -15,10 +15,10 @@
 
 static void	generate_w(int i, t_wrap msg, unsigned int w[64])
 {
-	int		j;
+	int				j;
 	unsigned int	s0;
 	unsigned int	s1;
-	t_wrap	p;
+	t_wrap			p;
 
 	p.i = (msg.i + i * 16);
 	j = -1;
@@ -55,8 +55,8 @@ static void	set_abcd(unsigned int *abcd, unsigned int ch, unsigned int maj)
 
 static void	execute_operations(int i, unsigned int *abcd, unsigned int w[64])
 {
-	unsigned int ch;
-	unsigned int maj;
+	unsigned int	ch;
+	unsigned int	maj;
 
 	ch = (abcd[4] >> 6) | (abcd[4] << (32 - 6));
 	ch ^= (abcd[4] >> 11) | (abcd[4] << (32 - 11));
@@ -70,10 +70,10 @@ static void	execute_operations(int i, unsigned int *abcd, unsigned int w[64])
 	set_abcd(abcd, ch, maj);
 }
 
-t_wrap		sha256_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
+t_wrap	sha256_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
 {
-	size_t	i;
-	int		j;
+	size_t			i;
+	int				j;
 	unsigned int	w[64];
 	unsigned int	tmp_abcd[8];
 
