@@ -43,9 +43,9 @@ typedef struct	s_data
 
 typedef union	u_wrap{
 	char		*c;
-	u_char		*uc;
-	u_int		*i;
-	u_long		*l;
+	unsigned char		*uc;
+	unsigned int		*i;
+	unsigned long		*l;
 	size_t		*s;
 }				t_wrap;
 
@@ -75,7 +75,7 @@ t_wrap			md5(t_wrap a);
 t_wrap			sha256(t_wrap a);
 t_wrap			sha512(t_wrap a);
 t_wrap			whirlpool(t_wrap a);
-void			print_hex(u_char *a, t_source b, int c, char *d);
+void			print_hex(unsigned char *a, t_source b, int c, char *d);
 t_data			*init(char **a, int b);
 int				take_file(char *a, char **b);
 char			*take_stdin(void);

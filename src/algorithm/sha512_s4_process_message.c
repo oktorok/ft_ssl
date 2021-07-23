@@ -13,18 +13,18 @@
 #include "ft_ssl.h"
 #include "sha512.h"
 
-static void	generate_w(int i, t_wrap msg, ulong w[80])
+static void	generate_w(int i, t_wrap msg, unsigned long w[80])
 {
 	int		j;
-	ulong	s0;
-	ulong	s1;
+	unsigned long	s0;
+	unsigned long	s1;
 	t_wrap	p;
 
 	p.l = (msg.l + i * 16);
 	j = -1;
 	while (++j < 16)
 	{
-		w[j] = ((ulong *)little_to_big(p.l, 1, sizeof(p.l)))[0];
+		w[j] = ((unsigned long *)little_to_big(p.l, 1, sizeof(p.l)))[0];
 		p.l += 1;
 	}
 	while (j < 80)
@@ -40,7 +40,7 @@ static void	generate_w(int i, t_wrap msg, ulong w[80])
 	}
 }
 
-static void	set_abcd(ulong *abcd, ulong ch, ulong maj)
+static void	set_abcd(unsigned long *abcd, unsigned long ch, unsigned long maj)
 {
 	abcd[7] = abcd[6];
 	abcd[6] = abcd[5];
@@ -52,10 +52,10 @@ static void	set_abcd(ulong *abcd, ulong ch, ulong maj)
 	abcd[0] = ch + maj;
 }
 
-static void	execute_operations(int i, ulong *abcd, ulong w[64])
+static void	execute_operations(int i, unsigned long *abcd, unsigned long w[64])
 {
-	ulong ch;
-	ulong maj;
+	unsigned long ch;
+	unsigned long maj;
 
 	ch = (abcd[4] >> 14) | (abcd[4] << (64 - 14));
 	ch ^= (abcd[4] >> 18) | (abcd[4] << (64 - 18));
@@ -73,15 +73,15 @@ t_wrap		sha512_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
 {
 	size_t	i;
 	int		j;
-	ulong	w[80];
-	ulong	tmp_abcd[8];
+	unsigned long	w[80];
+	unsigned long	tmp_abcd[8];
 
 	i = 0;
 	while (i < msg_bits / 1024)
 	{
 		j = 0;
 		generate_w(i++, msg, w);
-		ft_memcpy(tmp_abcd, abcd.l, sizeof(ulong) * 8);
+		ft_memcpy(tmp_abcd, abcd.l, sizeof(unsigned long) * 8);
 		j = 0;
 		while (j < 80)
 			execute_operations(j++, abcd.l, w);

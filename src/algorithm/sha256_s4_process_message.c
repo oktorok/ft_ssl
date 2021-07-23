@@ -13,18 +13,18 @@
 #include "ft_ssl.h"
 #include "sha256.h"
 
-static void	generate_w(int i, t_wrap msg, uint w[64])
+static void	generate_w(int i, t_wrap msg, unsigned int w[64])
 {
 	int		j;
-	uint	s0;
-	uint	s1;
+	unsigned int	s0;
+	unsigned int	s1;
 	t_wrap	p;
 
 	p.i = (msg.i + i * 16);
 	j = -1;
 	while (++j < 16)
 	{
-		w[j] = ((uint *)little_to_big(p.i, 1, sizeof(p.i[0])))[0];
+		w[j] = ((unsigned int *)little_to_big(p.i, 1, sizeof(p.i[0])))[0];
 		w[j] = *p.i;
 		p.i += 1;
 	}
@@ -41,7 +41,7 @@ static void	generate_w(int i, t_wrap msg, uint w[64])
 	}
 }
 
-static void	set_abcd(uint *abcd, uint ch, uint maj)
+static void	set_abcd(unsigned int *abcd, unsigned int ch, unsigned int maj)
 {
 	abcd[7] = abcd[6];
 	abcd[6] = abcd[5];
@@ -53,10 +53,10 @@ static void	set_abcd(uint *abcd, uint ch, uint maj)
 	abcd[0] = ch + maj;
 }
 
-static void	execute_operations(int i, uint *abcd, uint w[64])
+static void	execute_operations(int i, unsigned int *abcd, unsigned int w[64])
 {
-	uint ch;
-	uint maj;
+	unsigned int ch;
+	unsigned int maj;
 
 	ch = (abcd[4] >> 6) | (abcd[4] << (32 - 6));
 	ch ^= (abcd[4] >> 11) | (abcd[4] << (32 - 11));
@@ -74,15 +74,15 @@ t_wrap		sha256_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
 {
 	size_t	i;
 	int		j;
-	uint	w[64];
-	uint	tmp_abcd[8];
+	unsigned int	w[64];
+	unsigned int	tmp_abcd[8];
 
 	i = 0;
 	while (i < msg_bits / (32 * 16))
 	{
 		j = 0;
 		generate_w(i++, msg, w);
-		ft_memcpy(tmp_abcd, abcd.i, sizeof(uint) * 8);
+		ft_memcpy(tmp_abcd, abcd.i, sizeof(unsigned int) * 8);
 		j = 0;
 		while (j < 64)
 			execute_operations(j++, abcd.i, w);

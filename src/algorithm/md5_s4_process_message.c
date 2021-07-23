@@ -13,7 +13,7 @@
 #include "ft_ssl.h"
 #include "md5.h"
 
-static uint	functions(uint x, uint y, uint z, char func)
+static unsigned int	functions(unsigned int x, unsigned int y, unsigned int z, char func)
 {
 	if (func == 'F')
 		return (x & y) | ((~x) & z);
@@ -26,17 +26,17 @@ static uint	functions(uint x, uint y, uint z, char func)
 	return (-1);
 }
 
-static uint	*generate_x(int i, uint *msg, uint x[64])
+static unsigned int	*generate_x(int i, unsigned int *msg, unsigned int x[64])
 {
-	ft_memcpy(x, msg + i * 16, 16 * sizeof(uint));
+	ft_memcpy(x, msg + i * 16, 16 * sizeof(unsigned int));
 	return (x);
 }
 
-static void	execute_operations(uint *abcd, uint *x, const char *op)
+static void	execute_operations(unsigned int *abcd, unsigned int *x, const char *op)
 {
-	uint	values[3];
+	unsigned int	values[3];
 	short	j[4];
-	uint	tmp;
+	unsigned int	tmp;
 
 	j[0] = op[0] - 'A';
 	j[1] = op[1] - 'A';
@@ -54,15 +54,15 @@ t_wrap		md5_process_message(t_wrap msg, size_t msg_bits, t_wrap abcd)
 {
 	size_t		i;
 	int			j;
-	uint		x[16];
-	uint		tmp_abcd[4];
+	unsigned int		x[16];
+	unsigned int		tmp_abcd[4];
 
 	i = 0;
 	while (i < msg_bits / (32 * 16))
 	{
 		j = 0;
 		generate_x(i++, msg.i, x);
-		ft_memcpy(tmp_abcd, abcd.l, sizeof(ulong) * 2);
+		ft_memcpy(tmp_abcd, abcd.l, sizeof(unsigned long) * 2);
 		while (j < 64)
 			execute_operations(abcd.i, x, g_operations[j++]);
 		abcd.i[0] += tmp_abcd[0];

@@ -41,7 +41,7 @@ t_wrap		sha512(t_wrap msg)
 	if (!final.c)
 		return (final);
 	final = sha512_process_message(digest, msg_bits, final);
-	final.l = (ulong *)little_to_big(final.l, 8, sizeof(final.l[0]));
+	final.l = (unsigned long *)little_to_big(final.l, 8, sizeof(final.l[0]));
 	ft_strdel(&digest.c);
 	return (final);
 }

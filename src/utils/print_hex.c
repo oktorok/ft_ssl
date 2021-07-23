@@ -61,6 +61,7 @@ static int	set_length(int hash)
 {
 	int length;
 
+	length = 0;
 	if (hash == MD5)
 		length = 16;
 	else if (hash == SHA256)
@@ -70,7 +71,7 @@ static int	set_length(int hash)
 	return (length);
 }
 
-static void	write_hash(u_char byte, int fd)
+static void	write_hash(unsigned char byte, int fd)
 {
 	char	*t;
 
@@ -83,7 +84,7 @@ static void	write_hash(u_char byte, int fd)
 	ft_strdel(&t);
 }
 
-void		print_hex(u_char *output, t_source src, int hash, char *output_file)
+void		print_hex(unsigned char *output, t_source src, int hash, char *output_file)
 {
 	int		fd;
 	int		j;

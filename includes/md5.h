@@ -31,7 +31,7 @@ const char	*g_operations[] = {
 	"ABCD I  8  6 57", "DABC I 15 10 58", "CDAB I  6 15 59", "BCDA I 13 21 60",
 	"ABCD I  4  6 61", "DABC I 11 10 62", "CDAB I  2 15 63", "BCDA I  9 21 64"
 };
-const uint	g_t[] = {
+const unsigned int	g_t[] = {
 	0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee,
 	0xf57c0faf, 0x4787c62a, 0xa8304613, 0xfd469501,
 	0x698098d8, 0x8b44f7af, 0xffff5bb1, 0x895cd7be,

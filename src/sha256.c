@@ -29,7 +29,7 @@ t_wrap	sha256(t_wrap msg)
 	if (!final.c)
 		return (final);
 	final = sha256_process_message(digest, msg_bits, final);
-	final.i = (uint *)little_to_big(final.i, 8, sizeof(final.i[0]));
+	final.i = (unsigned int *)little_to_big(final.i, 8, sizeof(final.i[0]));
 	ft_strdel(&digest.c);
 	return (final);
 }

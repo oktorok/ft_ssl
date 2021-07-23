@@ -16,6 +16,7 @@ static t_wrap	hashing(t_wrap digest, int hash)
 {
 	t_wrap	output;
 
+	output.i = 0;
 	if (hash == MD5)
 		output = md5(digest);
 	else if (hash == SHA256)
