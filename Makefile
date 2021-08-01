@@ -45,7 +45,7 @@ all: $(NAME)
 $(NAME): $(OBJ)
 
 $(OBJ_DIR)%.o : %.c $(HEADER_PATH)
-	@printf "\r                                          "
+	@printf "\r                                              "
 	@printf "\r\033[92m--->Compiling $(@F)\033[0m"
 	@gcc $(FLAGS) -I$(INCLUDES_DIR) -I$(LIBFT_HEADERS) -c $<
 	@mkdir -p $(OBJ_DIR)
@@ -56,12 +56,12 @@ else
 all:  check_libft $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT_PATH)$(LIBFT)
-	gcc $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
+	@gcc $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
 
 $(OBJ_DIR)%.o: $(HEADER_PATH) %.c
 	@printf "\033[92mCompiling ft_ssl...\033[0m\n"
 	@$(MAKE)  MODE=0
-	@printf "\r                                          "
+	@printf "\r                                              "
 	@printf "\r\033[92mDone ft_ssl[\xE2\x9C\x94]\n\033[0m"
 
 endif
