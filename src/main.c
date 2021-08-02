@@ -67,8 +67,8 @@ int	main(int argn, char **argv)
 	data = check_input(argn, argv);
 	if (!data)
 		return (-1);
-	j = 0;
-	while (j < data->source_num)
+	j = data->source_num - 1;
+	while (j >= 0)
 	{
 		digest.c = data->srcs[j].src;
 		if (digest.c)
@@ -76,11 +76,10 @@ int	main(int argn, char **argv)
 			output = hashing(digest, data->hash);
 			if (!output.c)
 				return (-1);
-			print_hex(output.uc, data->srcs[j++], data->hash,
-				data->output_file);
+			print_hex(output.uc, data->srcs[j--], data);
 		}
 		else
-			print_error(data->srcs[j++], data->hash);
+			print_error(data->srcs[j--], data->hash);
 	}
 	return (1);
 }

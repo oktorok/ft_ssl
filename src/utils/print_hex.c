@@ -12,35 +12,6 @@
 
 #include "ft_ssl.h"
 
-static void	print_prolog(int hash, t_source src, int fd)
-{
-	if (src.type == INPUT && check_flag('p'))
-	{
-		if (src.src[ft_strlen(src.src) - 1] != '\n')
-			ft_putendl_fd(src.src, fd);
-		return ;
-	}
-	if (check_flag('r') || check_flag('q'))
-		return ;
-	if (hash == MD5)
-		ft_putstr_fd("MD5 (", fd);
-	else if (hash == SHA256)
-		ft_putstr_fd("SHA256 (", fd);
-	else if (hash == SHA512)
-		ft_putstr_fd("SHA512 (", fd);
-	else if (hash == WHIRLPOOL)
-		ft_putstr_fd("WHIRLPOOL (", fd);
-	if (src.type == STRING)
-	{
-		ft_putchar_fd('\"', fd);
-		ft_putstr_fd(src.name, fd);
-		ft_putchar_fd('\"', fd);
-	}
-	else if (src.type == FILE)
-		ft_putstr_fd(src.name, fd);
-	ft_putstr_fd(") = ", fd);
-}
-
 static void	print_epilog(t_source src, int fd)
 {
 	if (check_flag('r') && src.type != INPUT)
@@ -84,7 +55,7 @@ static void	write_hash(unsigned char byte, int fd)
 	ft_strdel(&t);
 }
 
-void	print_hex(unsigned char *output, t_source src, int hash, char *outputf)
+void	print_hex(unsigned char *output, t_source src, t_data *data)
 {
 	int		fd;
 	int		j;
@@ -92,16 +63,16 @@ void	print_hex(unsigned char *output, t_source src, int hash, char *outputf)
 
 	j = 0;
 	fd = 1;
-	length = set_length(hash);
-	if (outputf)
-		fd = open(outputf, O_WRONLY | O_CREAT, 0666);
-	if (!check_flag('n'))
-		print_prolog(hash, src, fd);
+	length = set_length(data->hash);
+	if (data->output_file)
+		fd = open(data->output_file, O_WRONLY | O_CREAT, 0666);
+	if (!check_flag('n') && !check_flag('q'))
+		print_prolog(data, src, fd);
 	while (j < length)
 		write_hash(output[j++], fd);
 	if (!check_flag('q') && !check_flag('n'))
 		print_epilog(src, fd);
 	ft_putendl_fd("", fd);
-	if (fd)
+	if (fd != 1)
 		close(fd);
 }

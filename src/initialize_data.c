@@ -19,18 +19,26 @@ static void	set_src_params(t_source *srcs, char *name, int *j, int input)
 	(*j)++;
 }
 
-static int	check_p_s(t_source *srcs, int source_num, int *j, char **argv)
+static int	check_p_s(t_source *srcs, int *j, char **argv)
 {
-	if (!source_num || check_flag('p'))
+	char	*tmp_s;
+	int		i;
+
+	if (check_flag('s'))
+		tmp_s = ft_strdup(*argv++);
+	i = *j;
+	while (argv[i])
+		i++;
+	i--;
+	while (i + 1)
 	{
-		srcs[*j].src = take_stdin();
-		if (!srcs[*j].src)
+		if (take_file(argv[i], &srcs[*j].src) < 0)
 			return (0);
-		set_src_params(srcs, srcs[*j].src, j, INPUT);
+		set_src_params(srcs, argv[i--], j, FILE);
 	}
 	if (check_flag('s'))
 	{
-		srcs[*j].src = ft_strdup(*argv++);
+		srcs[*j].src = tmp_s;
 		if (!srcs[*j].src)
 			return (0);
 		set_src_params(srcs, srcs[*j].src, j, STRING);
@@ -47,13 +55,14 @@ static t_source	*fill_srcs(int source_num, char **argv)
 	if (!srcs)
 		return (NULL);
 	j = 0;
-	if (!check_p_s(srcs, source_num, &j, argv))
+	if (!check_p_s(srcs, &j, argv))
 		return (NULL);
-	while (*argv)
+	if (check_flag('p') || !j)
 	{
-		if (take_file(*argv, &srcs[j].src) < 0)
+		srcs[j].src = take_stdin();
+		if (!srcs[j].src)
 			return (NULL);
-		set_src_params(srcs, *argv++, &j, FILE);
+		set_src_params(srcs, srcs[j].src, &j, INPUT);
 	}
 	return (srcs);
 }
@@ -90,6 +99,8 @@ t_data	*init(char **argv, int argn)
 	if (!(fill_hash(argv, data)))
 		return (NULL);
 	data->source_num = check_flag('p') + argn - i;
+	if (!data->source_num)
+		data->source_num += 1;
 	data->srcs = fill_srcs(data->source_num, argv + i);
 	if (!(data->srcs))
 		return (NULL);

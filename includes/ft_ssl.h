@@ -75,7 +75,7 @@ t_wrap			md5(t_wrap a);
 t_wrap			sha256(t_wrap a);
 t_wrap			sha512(t_wrap a);
 t_wrap			whirlpool(t_wrap a);
-void			print_hex(unsigned char *a, t_source b, int c, char *d);
+void			print_hex(unsigned char *a, t_source b, t_data *d);
 t_data			*init(char **a, int b);
 int				take_file(char *a, char **b);
 char			*take_stdin(void);
@@ -83,4 +83,5 @@ int				read_file(int a, char **b);
 int				calc_adding_bits(size_t a);
 void			*little_to_big(void *a, size_t b, size_t c);
 unsigned char	gf_mult(unsigned char b, unsigned char a);
+void			print_prolog(t_data *data, t_source src, int fd);
 #endif

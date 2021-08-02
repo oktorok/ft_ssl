@@ -57,8 +57,6 @@ int	set_flags(char **argv, t_data *data)
 		if (argv[i - 1][ns] == 'o')
 			data->output_file = argv[i++];
 	}
-	if (!flags && !(argv[i]))
-		flags |= (1 << ('p' - 'a'));
 	check_flag(flags);
 	return (i);
 }
@@ -67,6 +65,12 @@ char	check_flag(int to_check)
 {
 	static int	flags = -1;
 
+	if (to_check == -1)
+	{
+		if (flags)
+			return (1);
+		return (0);
+	}
 	if (flags < 0)
 	{
 		flags = to_check;
