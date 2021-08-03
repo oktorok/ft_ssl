@@ -38,7 +38,7 @@ typedef struct s_data
 	int			hash;
 	int			source_num;
 	t_source	*srcs;
-	char		*output_file;
+	int			output_fd;
 }				t_data;
 
 typedef union u_wrap{

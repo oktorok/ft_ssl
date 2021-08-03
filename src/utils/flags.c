@@ -44,6 +44,7 @@ int	set_flags(char **argv, t_data *data)
 	flags = 0;
 	ns = 0;
 	i = check_first_dash(argv[1][0]);
+	data->output_fd = 0;
 	while (argv[i] && argv[i][0] == '-')
 	{
 		while (argv[i][ns] == '-')
@@ -55,7 +56,8 @@ int	set_flags(char **argv, t_data *data)
 		}
 		flags |= (1 << (argv[i++][ns] - 'a'));
 		if (argv[i - 1][ns] == 'o')
-			data->output_file = argv[i++];
+			data->output_fd = open(argv[i++],
+					O_WRONLY | O_CREAT, 0666);
 	}
 	check_flag(flags);
 	return (i);

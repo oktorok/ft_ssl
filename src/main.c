@@ -81,5 +81,7 @@ int	main(int argn, char **argv)
 		else
 			print_error(data->srcs[j--], data->hash);
 	}
+	if (data->output_fd)
+		close(data->output_fd);
 	return (1);
 }

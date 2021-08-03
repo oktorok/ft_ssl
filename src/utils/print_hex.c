@@ -64,15 +64,13 @@ void	print_hex(unsigned char *output, t_source src, t_data *data)
 	j = 0;
 	fd = 1;
 	length = set_length(data->hash);
-	if (data->output_file)
-		fd = open(data->output_file, O_WRONLY | O_CREAT, 0666);
-	if (!check_flag('n') && !check_flag('q'))
+	if (data->output_fd)
+		fd = data->output_fd;
+	if (!check_flag('n') && (!check_flag('q') || data->source_num > 1))
 		print_prolog(data, src, fd);
 	while (j < length)
 		write_hash(output[j++], fd);
 	if (!check_flag('q') && !check_flag('n'))
 		print_epilog(src, fd);
 	ft_putendl_fd("", fd);
-	if (fd != 1)
-		close(fd);
 }
