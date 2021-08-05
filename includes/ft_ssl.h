@@ -20,10 +20,6 @@
 # define INPUT 0
 # define STRING 1
 # define FILE 2
-# define MD5 3
-# define SHA256 4
-# define SHA512 5
-# define WHIRLPOOL 6
 # define MAX_OFFSET 8
 
 typedef struct s_source
@@ -84,4 +80,12 @@ int				calc_adding_bits(size_t a);
 void			*little_to_big(void *a, size_t b, size_t c);
 unsigned char	gf_mult(unsigned char b, unsigned char a);
 void			print_prolog(t_data *data, t_source src, int fd);
+void			*free_error(void *data);
+
+extern	t_wrap		((*g_algo_func[4])(t_wrap));
+static const char	g_algo_str[4][10] = {
+	"md5", "sha256", "sha512", "whirlpool"};
+static const int	g_algo_num[4] = {
+	16, 32, 64, 64};
+
 #endif

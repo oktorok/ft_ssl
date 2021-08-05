@@ -6,3 +6,4 @@ little_to_big.c
 calc_adding_bits.c
 gf_mult.c
 print_prolog.c
+free_error.c

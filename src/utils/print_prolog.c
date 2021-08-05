@@ -32,6 +32,8 @@ static void	input_type(t_data *data, t_source src, int fd)
 
 void	print_prolog(t_data *data, t_source src, int fd)
 {
+	const char	*hash_str;
+
 	if (src.type == INPUT)
 	{
 		input_type(data, src, fd);
@@ -39,14 +41,9 @@ void	print_prolog(t_data *data, t_source src, int fd)
 	}
 	if (check_flag('r') || check_flag('q'))
 		return ;
-	if (data->hash == MD5)
-		ft_putstr_fd("MD5 (", fd);
-	else if (data->hash == SHA256)
-		ft_putstr_fd("SHA256 (", fd);
-	else if (data->hash == SHA512)
-		ft_putstr_fd("SHA512 (", fd);
-	else if (data->hash == WHIRLPOOL)
-		ft_putstr_fd("WHIRLPOOL (", fd);
+	hash_str = g_algo_str[data->hash];
+	ft_putstr_fd(hash_str, fd);
+	ft_putstr_fd(" (", fd);
 	if (src.type == STRING)
 	{
 		ft_putchar_fd('\"', fd);

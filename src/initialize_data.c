@@ -69,18 +69,17 @@ static t_source	*fill_srcs(int source_num, char **argv)
 
 static int	fill_hash(char **argv, t_data *data)
 {
-	if (ft_strequ(argv[1], "md5"))
-		data->hash = MD5;
-	else if (ft_strequ(argv[1], "sha256"))
-		data->hash = SHA256;
-	else if (ft_strequ(argv[1], "sha512"))
-		data->hash = SHA512;
-	else if (ft_strequ(argv[1], "whirlpool"))
-		data->hash = WHIRLPOOL;
-	else
+	data->hash = 0;
+	while (1)
 	{
-		ft_putstr("Hash algorithm not known\n");
-		return (0);
+		if (ft_strequ(argv[1], g_algo_str[data->hash]))
+			break ;
+		data->hash++;
+		if (!(g_algo_str[data->hash]))
+		{
+			ft_putstr("Hash algorithm not known\n");
+			return (0);
+		}
 	}
 	return (1);
 }
@@ -95,14 +94,14 @@ t_data	*init(char **argv, int argn)
 		return (NULL);
 	i = set_flags(argv, data);
 	if (!i)
-		return (NULL);
+		return (free_error(data));
 	if (!(fill_hash(argv, data)))
-		return (NULL);
+		return (free_error(data));
 	data->source_num = check_flag('p') + argn - i;
 	if (!data->source_num)
 		data->source_num += 1;
 	data->srcs = fill_srcs(data->source_num, argv + i);
 	if (!(data->srcs))
-		return (NULL);
+		return (free_error(data));
 	return (data);
 }

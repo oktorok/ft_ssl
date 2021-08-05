@@ -32,13 +32,7 @@ static int	set_length(int hash)
 {
 	int	length;
 
-	length = 0;
-	if (hash == MD5)
-		length = 16;
-	else if (hash == SHA256)
-		length = 32;
-	else if (hash == SHA512 || hash == WHIRLPOOL)
-		length = 64;
+	length = g_algo_num[hash];
 	return (length);
 }
 

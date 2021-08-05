@@ -3,3 +3,4 @@ md5.h
 sha256.h
 sha512.h
 whirlpool.h
+extern.h

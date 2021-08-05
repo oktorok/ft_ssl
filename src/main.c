@@ -11,34 +11,25 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
+#include "extern.h"
 
 static t_wrap	hashing(t_wrap digest, int hash)
 {
 	t_wrap	output;
 
 	output.i = 0;
-	if (hash == MD5)
-		output = md5(digest);
-	else if (hash == SHA256)
-		output = sha256(digest);
-	else if (hash == SHA512)
-		output = sha512(digest);
-	else if (hash == WHIRLPOOL)
-		output = whirlpool(digest);
+	output = g_algo_func[hash](digest);
 	return (output);
 }
 
 static void	print_error(t_source src, int hash)
 {
+	const char	*hash_str;
+
 	ft_putstr("ft_ssl: ");
-	if (hash == MD5)
-		ft_putstr("md5: ");
-	else if (hash == SHA256)
-		ft_putstr("sha256: ");
-	else if (hash == SHA512)
-		ft_putstr("sha512: ");
-	else if (hash == WHIRLPOOL)
-		ft_putstr("whirlpool: ");
+	hash_str = g_algo_str[hash];
+	ft_putstr(hash_str);
+	ft_putstr(": ");
 	ft_putstr(src.name);
 	ft_putendl(": No such file or directory");
 }
