@@ -98,6 +98,7 @@ t_data	*init(char **argv, int argn)
 	data = (t_data *)ft_memalloc(sizeof(t_data));
 	if (!data)
 		return (NULL);
+	data->output_fd = 0;
 	i = set_flags(argv, data);
 	if (!i)
 		return (free_error(data));
