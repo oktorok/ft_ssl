@@ -56,12 +56,18 @@ static t_source	*fill_srcs(int source_num, char **argv)
 		return (NULL);
 	j = 0;
 	if (!check_p_s(srcs, &j, argv))
+	{
+		free(srcs);
 		return (NULL);
+	}
 	if (check_flag('p') || !j)
 	{
 		srcs[j].src = take_stdin();
 		if (!srcs[j].src)
+		{
+			free(srcs);
 			return (NULL);
+		}
 		set_src_params(srcs, srcs[j].src, &j, INPUT);
 	}
 	return (srcs);
@@ -75,7 +81,7 @@ static int	fill_hash(char **argv, t_data *data)
 		if (ft_strequ(argv[1], g_algo_str[data->hash]))
 			break ;
 		data->hash++;
-		if (!(g_algo_str[data->hash]))
+		if (!(g_algo_str[data->hash][0]))
 		{
 			ft_putstr("Hash algorithm not known\n");
 			return (0);

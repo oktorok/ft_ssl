@@ -17,7 +17,7 @@ char	*take_stdin(void)
 	char	*input;
 
 	input = NULL;
-	if (!read_file(0, &input))
+	if (read_file(0, &input) < 0)
 		return (NULL);
 	return (input);
 }

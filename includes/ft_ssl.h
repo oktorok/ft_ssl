@@ -83,9 +83,7 @@ void			print_prolog(t_data *data, t_source src, int fd);
 void			*free_error(void *data);
 
 extern	t_wrap		((*g_algo_func[4])(t_wrap));
-static const char	g_algo_str[4][10] = {
-	"md5", "sha256", "sha512", "whirlpool"};
-static const int	g_algo_num[4] = {
-	16, 32, 64, 64};
+extern const char	g_algo_str[][20];
+extern const int	g_algo_num[];
 
 #endif

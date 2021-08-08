@@ -15,5 +15,8 @@
 
 t_wrap (*g_algo_func[4])(t_wrap) = {
 md5, sha256, sha512, whirlpool};
-
+const char	g_algo_str[][20] = {
+	"md5", "sha256", "sha512", "whirlpool", ""};
+const int	g_algo_num[] = {
+	16, 32, 64, 64};
 #endif

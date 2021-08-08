@@ -23,13 +23,17 @@ int	read_file(int fd, char **content)
 	{
 		ro = read(fd, buffer, BUFFER_SIZE);
 		if (ro < 0)
-			return (0);
-		else if (!ro)
-			break ;
+		{
+			if (content)
+				free(content);
+			return (-1);
+		}
 		len = ft_strlen(*content);
 		*content = ft_strrealloc(*content, ro + len);
 		if (!(*content))
-			return (0);
+			return (-1);
+		else if (!ro)
+			break ;
 		ft_strncpy(*content + len, buffer, ro);
 	}
 	return (1);
