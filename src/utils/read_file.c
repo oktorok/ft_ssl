@@ -20,7 +20,6 @@ size_t	read_file(int fd, char **content)
 
 	ro = 1;
 	total_ro = 0;
-	ft_putstr("COCO");
 	while (1)
 	{
 		ro = read(fd, buffer, BUFFER_SIZE);
@@ -35,9 +34,8 @@ size_t	read_file(int fd, char **content)
 			return (0);
 		else if (!ro)
 			break ;
-		total_ro += ro;
 		ft_memcpy(*content + total_ro, buffer, ro);
+		total_ro += ro;
 	}
-	ft_putstr("CACA");
 	return (total_ro);
 }
