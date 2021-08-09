@@ -12,17 +12,18 @@
 
 #include "ft_ssl.h"
 
-static void	set_src_params(t_source *srcs, char *name, int *j, int input)
+static void	set_src_params(t_source *srcs, char *name, size_t size, int input)
 {
-	srcs[*j].name = name;
-	srcs[*j].type = input;
-	(*j)++;
+	srcs->name = name;
+	srcs->type = input;
+	srcs->size = size;
 }
 
 static int	check_p_s(t_source *srcs, int *j, char **argv)
 {
 	char	*tmp_s;
 	int		i;
+	size_t	total_ro;
 
 	if (check_flag('s'))
 		tmp_s = ft_strdup(*argv++);
@@ -32,16 +33,19 @@ static int	check_p_s(t_source *srcs, int *j, char **argv)
 	i--;
 	while (i + 1)
 	{
-		if (take_file(argv[i], &srcs[*j].src) < 0)
+		total_ro = take_file(argv[i], &srcs[*j].src);
+		if (total_ro < 0)
 			return (0);
-		set_src_params(srcs, argv[i--], j, FILE);
+		set_src_params(srcs + *j, argv[i--], total_ro, FILE);
+		(*j)++;
 	}
 	if (check_flag('s'))
 	{
 		srcs[*j].src = tmp_s;
 		if (!srcs[*j].src)
 			return (0);
-		set_src_params(srcs, srcs[*j].src, j, STRING);
+		set_src_params(srcs + *j, srcs[*j].src, ultra_strlen(tmp_s), STRING);
+		(*j)++;
 	}
 	return (1);
 }
@@ -50,6 +54,7 @@ static t_source	*fill_srcs(int source_num, char **argv)
 {
 	t_source	*srcs;
 	int			j;
+	size_t		total_ro;
 
 	srcs = ft_memalloc(sizeof(t_source) * source_num);
 	if (!srcs)
@@ -60,15 +65,17 @@ static t_source	*fill_srcs(int source_num, char **argv)
 		free(srcs);
 		return (NULL);
 	}
+	
 	if (check_flag('p') || !j)
 	{
-		srcs[j].src = take_stdin();
-		if (!srcs[j].src)
+		total_ro = take_stdin(&srcs[j].src);
+		if (!srcs[j].src || total_ro < 0)
 		{
 			free(srcs);
 			return (NULL);
 		}
-		set_src_params(srcs, srcs[j].src, &j, INPUT);
+		set_src_params(srcs + j, srcs[j].src, total_ro, INPUT);
+		j++;
 	}
 	return (srcs);
 }

@@ -13,7 +13,7 @@
 #ifndef EXTERN_H
 # define EXTERN_H
 
-t_wrap (*g_algo_func[4])(t_wrap) = {
+t_wrap (*g_algo_func[4])(t_wrap, size_t) = {
 md5, sha256, sha512, whirlpool};
 const char	g_algo_str[][20] = {
 	"md5", "sha256", "sha512", "whirlpool", ""};

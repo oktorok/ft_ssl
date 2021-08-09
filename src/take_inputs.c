@@ -12,24 +12,39 @@
 
 #include "ft_ssl.h"
 
-char	*take_stdin(void)
+size_t	take_stdin(char **input)
 {
-	char	*input;
+	size_t	total_ro;
 
 	input = NULL;
-	if (read_file(0, &input) < 0)
-		return (NULL);
-	return (input);
+	total_ro = read_file(0, input);
+	if (total_ro < 0)
+	{
+		if (*input)
+			free(*input);
+		return (-1);
+	}
+	return (total_ro);
 }
 
-int	take_file(char *filename, char **files)
+size_t	take_file(char *filename, char **files)
 {
 	int		fd;
+	size_t		total_ro;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
 		*files = NULL;
 	else
-		return (read_file(fd, files));
+	{
+		total_ro = read_file(fd, files);
+		if (total_ro < 0)
+		{
+			if (*files)
+				free(files);
+			return (-1);
+		}
+		return (total_ro);
+	}
 	return (0);
 }

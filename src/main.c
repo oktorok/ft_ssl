@@ -13,12 +13,12 @@
 #include "ft_ssl.h"
 #include "extern.h"
 
-static t_wrap	hashing(t_wrap digest, int hash)
+static t_wrap	hashing(t_wrap digest, int hash, size_t length)
 {
 	t_wrap	output;
 
 	output.i = 0;
-	output = g_algo_func[hash](digest);
+	output = g_algo_func[hash](digest, length);
 	return (output);
 }
 
@@ -73,7 +73,7 @@ int	main(int argn, char **argv)
 		digest.c = data->srcs[j].src;
 		if (digest.c)
 		{
-			output = hashing(digest, data->hash);
+			output = hashing(digest, data->hash, data->srcs[j].size);
 			if (!output.c)
 				return (0);
 			print_hex(output.uc, data->srcs[j--], data);

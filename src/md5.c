@@ -11,16 +11,15 @@
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
-#include <stdio.h>
 
-t_wrap	md5(t_wrap msg)
+t_wrap	md5(t_wrap msg, size_t length)
 {
 	size_t		original_length;
 	size_t		msg_bits;
 	t_wrap		digest;
 	t_wrap		final;
 
-	original_length = ultra_strlen(msg.c);
+	original_length = length;
 	msg_bits = original_length * 8 + calc_adding_bits(original_length * 8) + 64;
 	digest.c = ft_strrealloc(&msg.c, msg_bits / 8);
 	if (!digest.c)

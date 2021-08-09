@@ -27,6 +27,7 @@ typedef struct s_source
 	char		type;
 	char		*src;
 	char		*name;
+	size_t		size;
 }				t_source;
 
 typedef struct s_data
@@ -67,22 +68,22 @@ t_wrap			sha512_process_message(t_wrap a, size_t b, t_wrap c);
 t_wrap			sha256_process_message(t_wrap a, size_t b, t_wrap c);
 t_wrap			whirlpool_process_message(t_wrap a, size_t b, t_wrap c);
 char			**get_files(int c, char **b, int a, t_data *d);
-t_wrap			md5(t_wrap a);
-t_wrap			sha256(t_wrap a);
-t_wrap			sha512(t_wrap a);
-t_wrap			whirlpool(t_wrap a);
+t_wrap			md5(t_wrap a, size_t b);
+t_wrap			sha256(t_wrap a, size_t b);
+t_wrap			sha512(t_wrap a, size_t b);
+t_wrap			whirlpool(t_wrap a, size_t b);
 void			print_hex(unsigned char *a, t_source b, t_data *d);
 t_data			*init(char **a, int b);
-int				take_file(char *a, char **b);
-char			*take_stdin(void);
-int				read_file(int a, char **b);
+size_t				take_file(char *a, char **b);
+size_t			take_stdin(char **input);
+size_t				read_file(int a, char **b);
 int				calc_adding_bits(size_t a);
 void			*little_to_big(void *a, size_t b, size_t c);
 unsigned char	gf_mult(unsigned char b, unsigned char a);
 void			print_prolog(t_data *data, t_source src, int fd);
 void			*free_error(void *data);
 
-extern	t_wrap		((*g_algo_func[4])(t_wrap));
+extern	t_wrap		((*g_algo_func[4])(t_wrap, size_t));
 extern const char	g_algo_str[][20];
 extern const int	g_algo_num[];
 
