@@ -18,12 +18,8 @@ size_t	take_stdin(char **input)
 
 	input = NULL;
 	total_ro = read_file(0, input);
-	if (total_ro < 0)
-	{
-		if (*input)
-			ft_strdel(input);
+	if (!*input)
 		return (0);
-	}
 	return (total_ro);
 }
 
