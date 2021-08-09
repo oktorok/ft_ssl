@@ -50,8 +50,17 @@ an explanation of the correct format");
 
 static void	finish_program(t_data *data, t_wrap output)
 {
+	int i;
+
+	i = 0;
 	if (data->output_fd)
-		close(data->output_fd);	
+		close(data->output_fd);
+	while (i < data->source_num)
+	{
+		if (data->srcs[i].type == FILE)
+			free(data->srcs[i].src);
+		i++;
+	}
 	free(data->srcs);
 	free(data);
 	free(output.c);

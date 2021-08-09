@@ -23,7 +23,7 @@ t_wrap	md5(t_wrap msg, size_t length)
 	ft_putnbr(original_length);
 	msg_bits = original_length * 8 + calc_adding_bits(original_length * 8) + 64;
 	digest.c = ft_memalloc(msg_bits / 8);
-	digest.c = ft_strcpy(digest.c, msg.c);
+	digest.c = ft_memcpy(digest.c, msg.c, original_length);
 	if (!digest.c)
 		return (digest);
 	digest = md5_append_bits(digest, original_length);
