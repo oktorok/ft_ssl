@@ -57,7 +57,7 @@ static void	finish_program(t_data *data, t_wrap output)
 		close(data->output_fd);
 	while (i < data->source_num)
 	{
-		if (data->srcs[i].type == FILE)
+		if (data->srcs[i].type == FILE || data->srcs[i].type == STRING)
 			free(data->srcs[i].src);
 		i++;
 	}
