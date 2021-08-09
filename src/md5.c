@@ -20,7 +20,6 @@ t_wrap	md5(t_wrap msg, size_t length)
 	t_wrap		final;
 
 	original_length = length;
-	ft_putnbr(original_length);
 	msg_bits = original_length * 8 + calc_adding_bits(original_length * 8) + 64;
 	digest.c = ft_memalloc(msg_bits / 8);
 	digest.c = ft_memcpy(digest.c, msg.c, original_length);
