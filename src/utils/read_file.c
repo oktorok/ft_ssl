@@ -29,7 +29,7 @@ int	read_file(int fd, char **content)
 			return (-1);
 		}
 		len = ft_strlen(*content);
-		*content = ft_strrealloc(*content, ro + len);
+		*content = ft_strrealloc(content, ro + len);
 		if (!(*content))
 			return (-1);
 		else if (!ro)

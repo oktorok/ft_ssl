@@ -21,7 +21,7 @@ t_wrap	whirlpool(t_wrap msg)
 
 	original_length = ultra_strlen(msg.c);
 	msg_bits = original_length * 8 + calc_adding_bits(original_length * 8) + 64;
-	digest.c = ft_strrealloc(msg.c, msg_bits / 8);
+	digest.c = ft_strrealloc(&msg.c, msg_bits / 8);
 	if (!digest.c)
 		return (digest);
 	digest = whirlpool_append_bits(digest, original_length);

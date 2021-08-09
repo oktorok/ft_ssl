@@ -48,6 +48,15 @@ an explanation of the correct format");
 	return (data);
 }
 
+static void	finish_program(t_data *data, t_wrap output)
+{
+	if (data->output_fd)
+		close(data->output_fd);
+	free(data->srcs);
+	free(data);
+	free(output.c);
+}
+
 int	main(int argn, char **argv)
 {
 	t_data	*data;
@@ -57,7 +66,7 @@ int	main(int argn, char **argv)
 
 	data = check_input(argn, argv);
 	if (!data)
-		return (-1);
+		return (0);
 	j = data->source_num - 1;
 	while (j >= 0)
 	{
@@ -66,13 +75,12 @@ int	main(int argn, char **argv)
 		{
 			output = hashing(digest, data->hash);
 			if (!output.c)
-				return (-1);
+				return (0);
 			print_hex(output.uc, data->srcs[j--], data);
 		}
 		else
 			print_error(data->srcs[j--], data->hash);
 	}
-	if (data->output_fd)
-		close(data->output_fd);
+	finish_program(data, output);
 	return (1);
 }
