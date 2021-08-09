@@ -36,7 +36,7 @@ static int	check_p_s(t_source *srcs, int *j, char **argv)
 		total_ro = take_file(argv[i], &srcs[*j].src);
 		if (!srcs[*j].src)
 			return (0);
-		set_src_params(srcs + *j, argv[i--], total_ro, FILE);
+		set_src_params(srcs + (*j), argv[i--], total_ro, FILE);
 		(*j)++;
 	}
 	if (check_flag('s'))
@@ -44,7 +44,7 @@ static int	check_p_s(t_source *srcs, int *j, char **argv)
 		srcs[*j].src = tmp_s;
 		if (!srcs[*j].src)
 			return (0);
-		set_src_params(srcs + *j, srcs[*j].src, ultra_strlen(tmp_s), STRING);
+		set_src_params(srcs + (*j), srcs[*j].src, ultra_strlen(tmp_s), STRING);
 		(*j)++;
 	}
 	return (1);

@@ -34,7 +34,8 @@ t_wrap	sha512(t_wrap msg, size_t length)
 	/* original_length = ultra_strlen(msg.c); */
 	original_length = length;
 	msg_bits = original_length * 8 + bits_for_add(original_length * 8) + 128;
-	digest.c = ft_strrealloc(&msg.c, msg_bits / 8);
+	digest.c = ft_memalloc(msg_bits / 8);
+	digest.c = ft_strcpy(digest.c, msg.c);
 	if (!digest.c)
 		return (digest);
 	digest = sha512_append_bits(digest, original_length);

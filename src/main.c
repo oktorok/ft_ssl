@@ -51,7 +51,7 @@ an explanation of the correct format");
 static void	finish_program(t_data *data, t_wrap output)
 {
 	if (data->output_fd)
-		close(data->output_fd);
+		close(data->output_fd);	
 	free(data->srcs);
 	free(data);
 	free(output.c);

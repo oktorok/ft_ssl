@@ -16,11 +16,11 @@ size_t	read_file(int fd, char **content)
 {
 	int		ro;
 	size_t		total_ro;
-	int		len;
 	char	buffer[BUFFER_SIZE];
 
 	ro = 1;
 	total_ro = 0;
+	ft_putstr("COCO");
 	while (1)
 	{
 		ro = read(fd, buffer, BUFFER_SIZE);
@@ -30,14 +30,14 @@ size_t	read_file(int fd, char **content)
 				ft_strdel(content);
 			return (0);
 		}
-		total_ro += ro;
-		len = ft_strlen(*content);
-		*content = ft_strrealloc(content, ro + len);
+		*content = ft_memrealloc(*content, total_ro,  ro + total_ro);
 		if (!(*content))
 			return (0);
 		else if (!ro)
 			break ;
-		ft_strncpy(*content + len, buffer, ro);
+		total_ro += ro;
+		ft_memcpy(*content + total_ro, buffer, ro);
 	}
+	ft_putstr("CACA");
 	return (total_ro);
 }
