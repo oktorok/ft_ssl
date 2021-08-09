@@ -25,12 +25,16 @@ size_t	read_file(int fd, char **content)
 	{
 		ro = read(fd, buffer, BUFFER_SIZE);
 		if (ro < 0)
-			return (-1);
+		{
+			if (*content)
+				ft_strdel(content);
+			return (0);
+		}
 		total_ro += ro;
 		len = ft_strlen(*content);
 		*content = ft_strrealloc(content, ro + len);
 		if (!(*content))
-			return (-1);
+			return (0);
 		else if (!ro)
 			break ;
 		ft_strncpy(*content + len, buffer, ro);

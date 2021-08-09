@@ -21,8 +21,8 @@ size_t	take_stdin(char **input)
 	if (total_ro < 0)
 	{
 		if (*input)
-			free(*input);
-		return (-1);
+			ft_strdel(input);
+		return (0);
 	}
 	return (total_ro);
 }
@@ -38,12 +38,8 @@ size_t	take_file(char *filename, char **files)
 	else
 	{
 		total_ro = read_file(fd, files);
-		if (total_ro < 0)
-		{
-			if (*files)
-				free(files);
-			return (-1);
-		}
+		if (!*files)
+			return (0);
 		return (total_ro);
 	}
 	return (0);

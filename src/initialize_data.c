@@ -34,7 +34,7 @@ static int	check_p_s(t_source *srcs, int *j, char **argv)
 	while (i + 1)
 	{
 		total_ro = take_file(argv[i], &srcs[*j].src);
-		if (total_ro < 0)
+		if (!srcs[*j].src)
 			return (0);
 		set_src_params(srcs + *j, argv[i--], total_ro, FILE);
 		(*j)++;
@@ -69,7 +69,7 @@ static t_source	*fill_srcs(int source_num, char **argv)
 	if (check_flag('p') || !j)
 	{
 		total_ro = take_stdin(&srcs[j].src);
-		if (!srcs[j].src || total_ro < 0)
+		if (!srcs[j].src)
 		{
 			free(srcs);
 			return (NULL);
