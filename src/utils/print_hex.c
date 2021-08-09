@@ -39,10 +39,12 @@ static int	set_length(int hash)
 static void	write_hash(unsigned char byte, int fd)
 {
 	char	*t;
+	char	*tt;
 
-	t = ft_itoa_base(byte, 16);
+	tt = ft_itoa_base(byte, 16);
 	if (!check_flag('c'))
-		t = ft_strmap(t, ft_tolower);
+		t = ft_strmap(tt, ft_tolower);
+	ft_strdel(&tt);
 	if (ft_strlen(t) != 2)
 		ft_putchar_fd('0', fd);
 	ft_putstr_fd(t, fd);
