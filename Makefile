@@ -42,7 +42,7 @@ ifeq ($(MODE), 0)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(OBJ) $(LIBFT_PATH)$(LIBFT)
 
 $(OBJ_DIR)%.o : %.c $(HEADER_PATH)
 	@printf "\r                                              "
@@ -56,7 +56,7 @@ else
 all:  check_libft $(NAME)
 
 $(NAME) : $(OBJ) $(LIBFT_PATH)$(LIBFT)
-	@gcc $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
+	gcc $(OBJ) -L$(LIBFT_PATH) -lft -o $(NAME)
 
 $(OBJ_DIR)%.o: $(HEADER_PATH) %.c
 	@printf "\033[92mCompiling ft_ssl...\033[0m\n"

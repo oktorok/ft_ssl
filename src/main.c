@@ -50,7 +50,7 @@ an explanation of the correct format");
 
 static void	finish_program(t_data *data, t_wrap output)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (data->output_fd)

@@ -16,7 +16,7 @@ size_t	take_stdin(char **input)
 {
 	size_t	total_ro;
 
-	input = NULL;
+	*input = NULL;
 	total_ro = read_file(0, input);
 	if (!*input)
 		return (0);
@@ -26,7 +26,7 @@ size_t	take_stdin(char **input)
 size_t	take_file(char *filename, char **files)
 {
 	int		fd;
-	size_t		total_ro;
+	size_t	total_ro;
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)

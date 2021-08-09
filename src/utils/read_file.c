@@ -15,7 +15,7 @@
 size_t	read_file(int fd, char **content)
 {
 	int		ro;
-	size_t		total_ro;
+	size_t	total_ro;
 	char	buffer[BUFFER_SIZE];
 
 	ro = 1;
@@ -29,7 +29,7 @@ size_t	read_file(int fd, char **content)
 				ft_strdel(content);
 			return (0);
 		}
-		*content = ft_memrealloc(*content, total_ro,  ro + total_ro);
+		*content = ft_memrealloc(*content, total_ro, ro + total_ro);
 		if (!(*content))
 			return (0);
 		else if (!ro)
