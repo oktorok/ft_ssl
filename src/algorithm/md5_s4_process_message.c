@@ -27,7 +27,7 @@ static unsigned int	functions(unsigned int x, unsigned int y,
 	return (-1);
 }
 
-static unsigned int	*generate_x(int i, unsigned int *msg, unsigned int x[64])
+static unsigned int	*generate_x(int i, unsigned int *msg, unsigned int x[16])
 {
 	ft_memcpy(x, msg + i * 16, 16 * sizeof(unsigned int));
 	return (x);

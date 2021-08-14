@@ -55,15 +55,13 @@ static void	finish_program(t_data *data, t_wrap output)
 	i = 0;
 	if (data->output_fd)
 		close(data->output_fd);
-	while (i < data->source_num)
-	{
-		if (data->srcs[i].type == FILE || data->srcs[i].type == STRING)
-			free(data->srcs[i].src);
-		i++;
-	}
-	free(data->srcs);
+	while (data->srcs && i < data->source_num)
+		free(data->srcs[i++].src);
+	if (data->srcs)
+		free(data->srcs);
 	free(data);
-	free(output.c);
+	if (output.c)
+		free(output.c);
 }
 
 int	main(int argn, char **argv)
@@ -84,7 +82,7 @@ int	main(int argn, char **argv)
 		{
 			output = hashing(digest, data->hash, data->srcs[j].size);
 			if (!output.c)
-				return (0);
+				break ;
 			print_hex(output.uc, data->srcs[j--], data);
 		}
 		else
