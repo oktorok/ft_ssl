@@ -23,15 +23,16 @@ size_t	read_file(int fd, char **content)
 	while (1)
 	{
 		ro = read(fd, buffer, BUFFER_SIZE);
+		printf("ro = %d\n", ro);
 		if (ro < 0)
 		{
 			if (*content)
 				ft_strdel(content);
 			return (0);
 		}
+		*content = ft_memrealloc(*content, total_ro, ro + total_ro);
 		if (!ro)
 			break ;
-		*content = ft_memrealloc(*content, total_ro, ro + total_ro);
 		if (!(*content))
 			return (0);
 		ft_memcpy(*content + total_ro, buffer, ro);
