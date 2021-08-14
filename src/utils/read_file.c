@@ -29,11 +29,11 @@ size_t	read_file(int fd, char **content)
 				ft_strdel(content);
 			return (0);
 		}
+		if (!ro)
+			break ;
 		*content = ft_memrealloc(*content, total_ro, ro + total_ro);
 		if (!(*content))
 			return (0);
-		else if (!ro)
-			break ;
 		ft_memcpy(*content + total_ro, buffer, ro);
 		total_ro += ro;
 	}

@@ -16,7 +16,7 @@
 # include <fcntl.h>
 # include <stdlib.h>
 # include "libft.h"
-# define BUFFER_SIZE 10
+# define BUFFER_SIZE 5000
 # define INPUT 0
 # define STRING 1
 # define FILE 2
