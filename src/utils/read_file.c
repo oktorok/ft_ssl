@@ -23,7 +23,6 @@ size_t	read_file(int fd, char **content)
 	while (1)
 	{
 		ro = read(fd, buffer, BUFFER_SIZE);
-		printf("ro = %d\n", ro);
 		if (ro < 0)
 		{
 			if (*content)
