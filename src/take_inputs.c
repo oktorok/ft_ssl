@@ -30,7 +30,10 @@ size_t	take_file(char *filename, char **files)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
+	{
+		ft_putstr("Error opening file\n");
 		*files = NULL;
+	}
 	else
 	{
 		total_ro = read_file(fd, files);
