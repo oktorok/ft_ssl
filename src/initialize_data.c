@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 17:06:55 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 02:10:41 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ static int	check_p_s(t_source *srcs, int *j, char **argv)
 	while (--i + 1)
 	{
 		total_ro = take_file(argv[i], &srcs[*j].src);
-		if (!srcs[*j].src)
-			return (0);
 		set_src_params(srcs + (*j)++, argv[i], total_ro, FILE);
 	}
 	if (check_flag('s'))

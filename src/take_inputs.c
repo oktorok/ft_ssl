@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 17:03:50 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 02:10:45 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,7 @@ size_t	take_file(char *filename, char **files)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-	{
-		ft_putstr("Error opening file\n");
 		*files = NULL;
-	}
 	else
 	{
 		total_ro = read_file(fd, files);

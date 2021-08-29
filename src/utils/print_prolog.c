@@ -6,42 +6,59 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:49 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 19:59:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 02:19:34 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static void	input_type(t_data *data, t_source src, int fd)
+static void	input_type(t_source src, int fd)
 {
+	int	q;
+
+	q = check_flag('q');
 	if (check_flag('p'))
 	{
+		if (!q)
+			ft_putstr_fd("(\"", fd);
 		if (src.src[ft_strlen(src.src) - 1] != '\n')
 			ft_putstr_fd(src.src, fd);
-		else if (data->source_num == 1)
-		{
-			write(fd, src.src, ft_strlen(src.src) - 1);
-			ft_putstr_fd("= ", fd);
-		}
 		else
-			ft_putstr_fd(src.src, fd);
+			write(fd, src.src, ft_strlen(src.src) - 1);
+		if (!q)
+			ft_putstr_fd("\")= ", fd);
+		else
+			ft_putstr_fd("\n", fd);
 	}
 	else
 		ft_putstr_fd("(stdin)= ", fd);
 }
 
+static char	*str_toupper(char *hash)
+{
+	char	*begin;
+
+	begin = hash;
+	while (*hash)
+	{
+		*hash = ft_toupper(*hash);
+		hash++;
+	}
+	return (begin);
+}
+
 void	print_prolog(t_data *data, t_source src, int fd)
 {
-	const char	*hash_str;
+	char	*hash_str;
 
 	if (src.type == INPUT)
 	{
-		input_type(data, src, fd);
+		input_type(src, fd);
 		return ;
 	}
 	if (check_flag('r') || check_flag('q'))
 		return ;
-	hash_str = g_algo_str[data->hash];
+	hash_str = str_toupper(g_algo_str[data->hash]);
 	ft_putstr_fd(hash_str, fd);
 	ft_putstr_fd(" (", fd);
 	if (src.type == STRING)
@@ -53,4 +70,5 @@ void	print_prolog(t_data *data, t_source src, int fd)
 	else if (src.type == FILE)
 		ft_putstr_fd(src.name, fd);
 	ft_putstr_fd(") = ", fd);
+	return ;
 }

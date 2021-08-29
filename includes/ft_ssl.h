@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:43:39 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 14:49:58 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 02:19:02 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void			print_prolog(t_data *data, t_source src, int fd);
 void			*free_error(void *data);
 
 extern	t_wrap		((*g_algo_func[4])(t_wrap, size_t));
-extern const char	g_algo_str[][20];
+extern char			g_algo_str[][20];
 extern const int	g_algo_num[];
 
 #endif
