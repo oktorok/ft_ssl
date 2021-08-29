@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:49 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 19:59:15 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 03:13:47 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,5 @@ void	print_hex(unsigned char *output, t_source src, t_data *data)
 	if (!check_flag('q') && !check_flag('n'))
 		print_epilog(src, fd);
 	ft_putendl_fd("", fd);
+	free(output);
 }

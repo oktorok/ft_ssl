@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2021/08/29 02:32:05 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 03:14:02 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ an explanation of the correct format");
 	return (data);
 }
 
-static void	finish_program(t_data *data, t_wrap output)
+static void	finish_program(t_data *data)
 {
 	int	i;
 
@@ -60,8 +60,6 @@ static void	finish_program(t_data *data, t_wrap output)
 	if (data->srcs)
 		free(data->srcs);
 	free(data);
-	if (output.c)
-		free(output.c);
 }
 
 int	main(int argn, char **argv)
@@ -89,6 +87,6 @@ int	main(int argn, char **argv)
 		else
 			print_error(data->srcs[j--], data->hash);
 	}
-	finish_program(data, output);
+	finish_program(data);
 	return (1);
 }

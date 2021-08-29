@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:49 by jagarcia          #+#    #+#             */
-/*   Updated: 2021/08/29 02:19:34 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 03:44:35 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,10 @@ static void	input_type(t_source src, int fd)
 	{
 		if (!q)
 			ft_putstr_fd("(\"", fd);
-		if (src.src[ft_strlen(src.src) - 1] != '\n')
+		if (src.src[src.size - 1] != '\n')
 			ft_putstr_fd(src.src, fd);
 		else
-			write(fd, src.src, ft_strlen(src.src) - 1);
+			write(fd, src.src, src.size - 1);
 		if (!q)
 			ft_putstr_fd("\")= ", fd);
 		else
@@ -56,7 +56,7 @@ void	print_prolog(t_data *data, t_source src, int fd)
 		input_type(src, fd);
 		return ;
 	}
-	if (check_flag('r') || check_flag('q'))
+	if (check_flag('r'))
 		return ;
 	hash_str = str_toupper(g_algo_str[data->hash]);
 	ft_putstr_fd(hash_str, fd);
