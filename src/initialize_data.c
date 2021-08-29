@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2021/08/29 03:47:08 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 13:19:59 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,10 @@ static void	set_src_params(t_source *srcs, char *name, size_t size, int input)
 {
 	srcs->name = name;
 	srcs->type = input;
-	srcs->size = size;
+	if (size)
+		srcs->size = size;
+	else
+		srcs->size = 1;
 }
 
 static int	check_p_s(t_source *srcs, int *j, char **argv)

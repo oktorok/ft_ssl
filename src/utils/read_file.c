@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:49 by jagarcia          #+#    #+#             */
-/*   Updated: 2021/08/29 13:06:47 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 13:22:21 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ size_t	read_file(int fd, char **content)
 				ft_strdel(content);
 			return (0);
 		}
-		*content = ft_memrealloc(*content, total_ro, ro + total_ro);
+		*content = ft_memrealloc(*content, total_ro, ro + total_ro + 1);
 		if (!ro)
 			break ;
 		if (!(*content))
@@ -37,5 +37,6 @@ size_t	read_file(int fd, char **content)
 		ft_memcpy(*content + total_ro, buffer, ro);
 		total_ro += ro;
 	}
+	(*content)[total_ro] = '\0';
 	return (total_ro);
 }
