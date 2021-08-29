@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2020/10/02 20:18:35 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 02:32:05 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ int	main(int argn, char **argv)
 	t_wrap	output;
 
 	data = check_input(argn, argv);
+	output.c = NULL;
 	if (!data)
 		return (0);
 	j = data->source_num - 1;
