@@ -6,7 +6,7 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:41:49 by jagarcia          #+#    #+#             */
-/*   Updated: 2021/08/29 13:19:31 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/08/29 22:10:15 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ static void	input_type(t_source src, int fd)
 	{
 		if (!q)
 			ft_putstr_fd("(\"", fd);
-		if (src.src[src.size - 1] != '\n')
+		if (src.size && src.src[src.size - 1] != '\n')
 			ft_putstr_fd(src.src, fd);
-		else
+		else if (src.size)
 			write(fd, src.src, src.size - 1);
 		if (!q)
 			ft_putstr_fd("\")= ", fd);

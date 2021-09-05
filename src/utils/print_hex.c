@@ -43,8 +43,12 @@ static void	write_hash(unsigned char byte, int fd)
 
 	tt = ft_itoa_base(byte, 16);
 	if (!check_flag('c'))
+	{
 		t = ft_strmap(tt, ft_tolower);
-	ft_strdel(&tt);
+		ft_strdel(&tt);
+	}
+	else
+		t = tt;
 	if (ft_strlen(t) != 2)
 		ft_putchar_fd('0', fd);
 	ft_putstr_fd(t, fd);
