@@ -6,17 +6,17 @@
 /*   By: jagarcia <jagarcia@student.42.us.org>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/10/02 14:40:32 by jagarcia          #+#    #+#             */
-/*   Updated: 2021/09/06 00:11:48 by jagarcia         ###   ########.fr       */
+/*   Updated: 2021/09/08 21:36:29 by jagarcia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_ssl.h"
 
-static int calc_adding_bits_whirlpool(size_t msg_bits)
+static int	calc_bits_wp(size_t msg_bits)
 {
-	int l;
+	int	l;
 
-	l = msg_bits/256;
+	l = msg_bits / 256;
 	if (l % 2)
 		return (256 - (msg_bits % 256) + 256);
 	else
@@ -31,7 +31,7 @@ t_wrap	whirlpool(t_wrap msg, size_t length)
 	t_wrap		final;
 
 	original_length = length;
-	msg_bits = original_length * 8 + calc_adding_bits_whirlpool(original_length * 8) + 256;
+	msg_bits = original_length * 8 + calc_bits_wp(original_length * 8) + 256;
 	digest.c = ft_memalloc(msg_bits / 8);
 	digest.c = ft_memcpy(digest.c, msg.c, original_length);
 	if (!digest.c)
